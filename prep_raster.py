@@ -1,8 +1,11 @@
-import os, json
+import os, json, math
 import numpy as np
 import rasterio
+from affine import Affine
 from rasterio.warp import calculate_default_transform, reproject, Resampling
 from PIL import Image
+
+MAXPX = 2000
 import geopandas as gpd
 import pandas as pd
 
@@ -15,6 +18,10 @@ def to_overlay(tif, mapping, out_png):
         dst_crs = "EPSG:4326"
         transform, width, height = calculate_default_transform(
             src.crs, dst_crs, src.width, src.height, *src.bounds)
+        step = max(1, math.ceil(max(width, height) / MAXPX))
+        width = math.ceil(width / step)
+        height = math.ceil(height / step)
+        transform = transform * Affine.scale(step, step)
         data = np.zeros((height, width), dtype="float32")
         reproject(
             source=rasterio.band(src, 1), destination=data,

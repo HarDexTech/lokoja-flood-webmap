@@ -81,7 +81,7 @@ const RISK = {1:{label:"Risk class 1",color:getComputedStyle(document.documentEl
               2:{label:"Risk class 2",color:getComputedStyle(document.documentElement).getPropertyValue('--c2').trim()},
               3:{label:"Risk class 3",color:getComputedStyle(document.documentElement).getPropertyValue('--c3').trim()}};
 
-const map = L.map('map', {zoomControl:true, attributionControl:true, minZoom:9, maxZoom:16});
+const map = L.map('map', {zoomControl:true, attributionControl:true, minZoom:10, maxZoom:16});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=REDACTED_KEY', {
   maxZoom: 19, attribution: '&copy; OpenStreetMap &copy; CARTO'
 }).addTo(map);

@@ -28,3 +28,11 @@
   - `index.html` legend: added "Lokoja boundary" row (dashed dark line, `#14201d`) above the flood-extent row.
 - **Verification:** `node --check` on extracted `<script>` → OK. Local server index → HTTP 200 (no browser run available). Pixel values verified with Pillow against real tiles: risk tile colours/alpha(190) and flood colour/alpha(170) confirmed to match the JS colour map.
 - **Notable:** Committed as `bdb1fe4`. Not yet pushed. Could not exercise the click handler in a real browser here — user to confirm interactively after reload.
+
+## 2026-10-16 16:30
+- **What changed:** Removed the CARTO API key from the site entirely by switching to a keyless basemap.
+  - Confirmed CARTO now **requires** a key: a keyless request returns a 2 KB opaque "API key needed" watermark tile (tested). So a keyless, no-watermark provider was required.
+  - `index.html`: replaced CARTO Positron with **Esri World Light Gray Canvas** (base + reference labels, both keyless, no watermark; attribution "Tiles © Esri"). Hard-coded key deleted.
+  - **Purged the key from git history** with `git-filter-repo --replace-text`; replacement token `REDACTED_KEY`. All commits were rewritten, so commit hashes quoted in earlier entries of this file are now **stale**.
+- **Verification:** `git log --all -S <key>` → none (key absent from every commit); `git grep` shows no key/carto in the working tree; `node --check` OK; local server index → HTTP 200; Esri base and reference tiles confirmed reachable without a key.
+- **Notable:** No `.env` and no GitHub secret are needed — with a keyless basemap there is no key to store or hide (a client-side key on a static site can never be hidden from the served page anyway). The leaked CARTO key should be revoked in the user's CARTO dashboard. Repo still unpushed. `prep_layers.py` formatting change preserved.

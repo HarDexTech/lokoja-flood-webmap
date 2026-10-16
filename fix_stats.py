@@ -15,7 +15,7 @@ ref.to_file(os.path.join(OUT, "accuracy_points.geojson"), driver="GeoJSON")
 with rasterio.open(os.path.join(SRC, "Flood_Extent_Clean.tif")) as src:
     px = abs(src.transform.a * src.transform.e)
     flood_km2 = round(int((src.read(1) == 1).sum()) * px / 1e6, 2)
-with rasterio.open(os.path.join(SRC, "Risk_Class.tif")) as src:
+with rasterio.open(os.path.join(SRC, "Risk_Class_Masked.tif")) as src:
     px = abs(src.transform.a * src.transform.e)
     band = src.read(1)
     risk_km2 = {str(v): round(int((band == v).sum()) * px / 1e6, 2) for v in (1, 2, 3)}

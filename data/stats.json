@@ -1,0 +1,12 @@
+{
+  "flood_extent_km2": 151.18,
+  "risk_area_km2": {
+    "1": 4422.0,
+    "2": 2130.94,
+    "3": 6113.63
+  },
+  "flood_accuracy": {
+    "n": 208,
+    "overall_accuracy": 0.962
+  }
+}

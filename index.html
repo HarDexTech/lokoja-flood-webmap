@@ -58,7 +58,6 @@
 </head>
 <body>
 <aside id="panel">
-  <span class="tag">Remote Sensing · ArcGIS Pro</span>
   <h1>Flood Extent &amp; Risk</h1>
   <p class="sub">Lokoja, Kogi State, Nigeria — 2022 flood event</p>
 
@@ -94,9 +93,11 @@ const RISK = {1:{label:"Low risk",color:getComputedStyle(document.documentElemen
               3:{label:"High risk",color:getComputedStyle(document.documentElement).getPropertyValue('--c3').trim()}};
 
 const map = L.map('map', {zoomControl:true, attributionControl:true, minZoom:9, maxZoom:16});
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=REDACTED_KEY', {
-  maxZoom: 19, attribution: '&copy; OpenStreetMap &copy; CARTO'
-}).addTo(map);
+const ESRI = 'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas';
+L.tileLayer(ESRI+'/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+  {maxZoom:16, attribution:'Tiles &copy; Esri'}).addTo(map);
+const labelLayer = L.tileLayer(ESRI+'/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}',
+  {maxZoom:16});
 
 const riskLayer = L.tileLayer('data/tiles/risk/{z}/{x}/{y}.png',
   {opacity:0.75, maxNativeZoom:13, maxZoom:16});
@@ -104,6 +105,7 @@ const floodLayer = L.tileLayer('data/tiles/flood/{z}/{x}/{y}.png',
   {opacity:0.9, maxNativeZoom:14, maxZoom:16});
 riskLayer.addTo(map);
 floodLayer.addTo(map);
+labelLayer.addTo(map);
 
 let boundaryLayer;
 const accuracyLayer = L.layerGroup().addTo(map);

@@ -20,3 +20,11 @@
   - **Corrected risk areas** (previously inflated by outside-boundary cells): Low 4414.55 km², Medium 2119.47 km², High 981.39 km² (High was ~6113 km²).
 - **Verification:** local `python -m http.server` — index, a z9 flood tile, a z9 risk tile and `stats.json` all HTTP 200. Flood accuracy unchanged (96.2%, n=208).
 - **Notable:** Committed as `9a7e840`. Not yet pushed. `prep_layers.py` had unrelated formatting changes in the working tree (not made here) — left uncommitted.
+
+## 2026-10-16 16:07
+- **What changed:** Added a Landsat-Explorer-style click popup and completed the legend.
+  - `index.html`: clicking the map opens a popup at the point showing the coordinate (5-decimal lat/lon, copy-to-clipboard button) plus the sampled **flood risk zone** (Low/Medium/High, or "Outside study area") and **2022 flood extent** (Inside/Outside).
+  - Sampling reads the actual tile PNG pixel for the clicked location (Web-Mercator tile math, `maxNativeZoom` capped at 13 for risk / 14 for flood, canvas `getImageData`). Risk pixels matched to (26,152,80)/(254,204,92)/(215,48,39); flood present when alpha > 0.
+  - `index.html` legend: added "Lokoja boundary" row (dashed dark line, `#14201d`) above the flood-extent row.
+- **Verification:** `node --check` on extracted `<script>` → OK. Local server index → HTTP 200 (no browser run available). Pixel values verified with Pillow against real tiles: risk tile colours/alpha(190) and flood colour/alpha(170) confirmed to match the JS colour map.
+- **Notable:** Committed as `bdb1fe4`. Not yet pushed. Could not exercise the click handler in a real browser here — user to confirm interactively after reload.

@@ -3,7 +3,7 @@
 Interactive web map of the 2022 flood extent and flood-risk zones for the Lokoja
 study area, built from satellite imagery and terrain analysis in ArcGIS Pro.
 
-**Live map:** _add your GitHub Pages link here after deploy_
+**Live map:** https://hardextech.github.io/lokoja-flood-webmap/
 
 ## What it shows
 
@@ -23,8 +23,8 @@ study area, built from satellite imagery and terrain analysis in ArcGIS Pro.
 
 | Layer | File | Type |
 |---|---|---|
-| Flood risk zones | `data/tiles/risk/{z}/{x}/{y}.png` | raster tiles (z10–13) |
-| 2022 flood extent | `data/tiles/flood/{z}/{x}/{y}.png` | raster tiles (z10–14) |
+| Flood risk zones | `data/tiles/risk/{z}/{x}/{y}.png` | raster tiles (z9–13) |
+| 2022 flood extent | `data/tiles/flood/{z}/{x}/{y}.png` | raster tiles (z9–14) |
 | Study area boundary | `data/boundary.geojson` | vector |
 | Validation points | `data/accuracy_points.geojson` | vector |
 | Figures | `data/stats.json` | table |

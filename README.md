@@ -23,8 +23,8 @@ study area, built from satellite imagery and terrain analysis in ArcGIS Pro.
 
 | Layer | File | Type |
 |---|---|---|
-| Flood risk zones | `data/risk_classes.png` | image overlay |
-| 2022 flood extent | `data/flood_extent.png` | image overlay |
+| Flood risk zones | `data/tiles/risk/{z}/{x}/{y}.png` | raster tiles (z10–13) |
+| 2022 flood extent | `data/tiles/flood/{z}/{x}/{y}.png` | raster tiles (z10–14) |
 | Study area boundary | `data/boundary.geojson` | vector |
 | Validation points | `data/accuracy_points.geojson` | vector |
 | Figures | `data/stats.json` | table |

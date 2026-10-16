@@ -81,16 +81,15 @@ const RISK = {1:{label:"Risk class 1",color:getComputedStyle(document.documentEl
               2:{label:"Risk class 2",color:getComputedStyle(document.documentElement).getPropertyValue('--c2').trim()},
               3:{label:"Risk class 3",color:getComputedStyle(document.documentElement).getPropertyValue('--c3').trim()}};
 
-const map = L.map('map', {zoomControl:true, attributionControl:true});
+const map = L.map('map', {zoomControl:true, attributionControl:true, minZoom:9, maxZoom:16});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=REDACTED_KEY', {
   maxZoom: 19, attribution: '&copy; OpenStreetMap &copy; CARTO'
 }).addTo(map);
 
-const riskBounds = [[7.5915794,6.0152900],[8.8195297,6.8732809]];
-const floodBounds = [[7.5915789,6.0152907],[8.8194383,6.8730099]];
-
-const riskLayer = L.imageOverlay('data/risk_classes.png', riskBounds, {opacity:0.75, interactive:false});
-const floodLayer = L.imageOverlay('data/flood_extent.png', floodBounds, {opacity:0.9, interactive:false});
+const riskLayer = L.tileLayer('data/tiles/risk/{z}/{x}/{y}.png',
+  {opacity:0.75, maxNativeZoom:13, maxZoom:16});
+const floodLayer = L.tileLayer('data/tiles/flood/{z}/{x}/{y}.png',
+  {opacity:0.9, maxNativeZoom:14, maxZoom:16});
 riskLayer.addTo(map);
 floodLayer.addTo(map);
 
